@@ -1,0 +1,38 @@
+Option Explicit On 
+Option Strict On
+Imports System
+Imports System.IO
+Imports Microsoft.VisualBasic
+Class DirAppend
+    Public Shared Sub Main()
+        Using w As StreamWriter = File.AppendText("log.txt")
+            Log("Test1", w)
+            Log("Test2", w)
+            ' Close the writer and underlying file.
+            w.Close()
+        End Using
+        ' Open and read the file.
+        Using r As StreamReader = File.OpenText("log.txt")
+            DumpLog(r)
+        End Using
+    End Sub
+    Public Shared Sub Log(ByVal logMessage As String, ByVal w As TextWriter)
+        w.Write(ControlChars.CrLf & "Log Entry : ")
+        w.WriteLine("{0} {1}", DateTime.Now.ToLongTimeString(), DateTime.Now.ToLongDateString())
+        w.WriteLine("  :")
+        w.WriteLine("  :{0}", logMessage)
+        w.WriteLine("-------------------------------")
+        ' Update the underlying file.
+        w.Flush()
+    End Sub
+    Public Shared Sub DumpLog(ByVal r As StreamReader)
+        ' While not at the end of the file, read and write lines.
+        Dim line As String
+        line = r.ReadLine()
+        While Not line Is Nothing
+            Console.WriteLine(line)
+            line = r.ReadLine()
+        End While
+        r.Close()
+    End Sub
+End Class
