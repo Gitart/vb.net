@@ -16,3 +16,25 @@ Public Class TextToFile
         End Using
     End Sub
 End Class
+
+
+Imports System
+Imports System.IO
+
+Class Test
+    Public Shared Sub Main()
+        ' Create an instance of StreamWriter to write text to a file.
+        Using sw As StreamWriter = New StreamWriter("TestFile.txt")
+            ' Add some text to the file.
+            sw.Write("This is the ")
+            sw.WriteLine("header for the file.")
+            sw.WriteLine("-------------------")
+            ' Arbitrary objects can also be written to the file.
+            sw.Write("The date is: ")
+            sw.WriteLine(DateTime.Now)
+            sw.Close()
+        End Using
+    End Sub
+End Class
+
+
