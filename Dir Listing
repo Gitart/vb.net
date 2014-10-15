@@ -1,0 +1,25 @@
+Option Explicit On 
+Option Strict On
+Imports System
+Imports System.IO
+Class DirectoryLister
+    Public Shared Sub Main(ByVal args As String())
+        Dim path As String = "."
+        If (args.Length > 0) Then
+            If File.Exists(args(0)) Then
+                path = args(0)
+            Else
+                Console.WriteLine("{0} not found; using current directory:", _
+                    args(0))
+            End If
+        End If
+        Dim dir As New DirectoryInfo(path)
+        Dim f As FileInfo
+        For Each f In dir.GetFiles("*.exe")
+            Dim name As [String] = f. Name
+            Dim size As Long = f.Length
+            Dim creationTime As DateTime = f.CreationTime
+            Console.WriteLine("{0,-12:N0} {1,-20:g} {2}", size, creationTime, name)
+        Next f
+    End Sub
+End Class
