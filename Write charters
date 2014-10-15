@@ -1,0 +1,23 @@
+Option Explicit On 
+Option Strict On
+Imports System
+Imports System.IO
+Imports System.Text
+Public Class CharsToStr
+    Public Shared Sub Main()
+        ' Create an instance of StringBuilder that can then be modified.
+        Dim sb As New StringBuilder("Some number of characters")
+        ' Define and create an instance of a character array from which 
+        ' characters will be read into the StringBuilder.
+        Dim b As Char() = {" "c, "t"c, "o"c, " "c, "w"c, "r"c, "i"c, "t"c, "e"c, " "c, "t"c, "o"c, "."c}
+        ' Create an instance of StringWriter 
+        ' and attach it to the StringBuilder.
+        Dim sw As New StringWriter(sb)
+        ' Write three characters from the array into the StringBuilder.
+        sw.Write(b, 0, 3)
+        ' Display the output.
+        Console.WriteLine(sb)
+        ' Close the StringWriter.
+        sw.Close()
+    End Sub
+End Class
