@@ -1,0 +1,18 @@
+Option Explicit On 
+Option Strict On
+Imports System
+Imports System.IO
+Public Class TextToFile
+    Private Const FILE_NAME As String = "MyFile.txt"
+    Public Shared Sub Main()
+        If File.Exists(FILE_NAME) Then
+            Console.WriteLine("{0} already exists.", FILE_NAME)
+            Return
+        End If
+        Using sw As StreamWriter = File.CreateText(FILE_NAME)
+            sw.WriteLine("This is my file.")
+            sw.WriteLine("I can write ints {0} or floats {1}, and so on.", 1, 4.2)
+            sw.Close()
+        End Using
+    End Sub
+End Class
